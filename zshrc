@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/adamsj/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -102,12 +102,15 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source ~/.zsh_aliases
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/usr/local/opt/qt
-export PATH=$PATH:/usr/local/opt/qt/bin
-export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
+if [ `uname` = "Darwin" ];then
+	echo "I'm on a mac"
+	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+	export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/usr/local/opt/qt
+	export PATH=$PATH:/usr/local/opt/qt/bin
+	export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
+	export PATH=$HOME/bin/kdiff3.app/Contents/MacOS:$PATH
+fi
 
-export PATH=/Users/adamsj/bin/:$PATH
-export PATH=/Users/adamsj/bin/kdiff3.app/Contents/MacOS:$PATH
+export PATH=$HOME/bin/:$PATH
 
-#source /Users/adamsj/ros2_dashing/ros2-osx/setup.zsh
+#source $HOME/ros2_dashing/ros2-osx/setup.zsh
