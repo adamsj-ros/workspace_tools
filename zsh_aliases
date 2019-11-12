@@ -1,4 +1,8 @@
-alias edit='open -a "Visual Studio Code"'
+if [ `uname` = "Darwin" ];then
+    alias edit='open -a "Visual Studio Code"'
+elif [ `uname` = "Linux" ];then
+    alias edit='gedit'
+fi
 
 alias ltr='ls -latr'
 

@@ -103,7 +103,7 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.zsh_aliases
 if [ `uname` = "Darwin" ];then
-	echo "I'm on a mac"
+	#echo "I'm on a mac"
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 	export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/usr/local/opt/qt
 	export PATH=$PATH:/usr/local/opt/qt/bin
