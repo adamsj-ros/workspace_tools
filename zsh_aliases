@@ -1,0 +1,13 @@
+alias edit='open -a "Visual Studio Code"'
+
+alias ltr='ls -latr'
+
+alias ec='edit ~/.zshrc'
+alias sc='source ~/.zshrc'
+alias vc='cat ~/.zshrc'
+
+alias ea='edit ~/.zsh_aliases'
+alias va='cat ~/.zsh_aliases'
+
+alias mkdir='mkdir -p'
+ 
