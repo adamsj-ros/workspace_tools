@@ -10,4 +10,33 @@ alias ea='edit ~/.zsh_aliases'
 alias va='cat ~/.zsh_aliases'
 
 alias mkdir='mkdir -p'
+
+#https://github.com/sympy/sympy/wiki/Git-hg-rosetta-stone
+hg()
+{
+#    echo $@
+    if [ "$@" = "paths" ]; then
+        git remote -v
+    elif [ "$@" = "status" ]; then
+        git status
+    elif [ "$@" = "push" ]; then
+        git push
+    elif [ "$@" = "pull" ]; then
+        git fetch
+    elif [ "$@" = "revert -a" ]; then
+        git reset --hard
+    elif [ "$@" = "revert" ]; then
+        git reset
+    elif [ "$@" = "update" ]; then
+        git checkout
+    elif [ "$@" = "branches" ]; then
+        git branch -a
+    elif [ "$@" = "branch" ]; then
+        git rev-parse --abbrev-ref HEAD
+    elif [ "$@" = "backout" ]; then
+        git revert
+    fi
+}
+
+alias hw='echo hello world'
  
