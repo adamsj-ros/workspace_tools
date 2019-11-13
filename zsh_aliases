@@ -39,6 +39,8 @@ hg()
         git rev-parse --abbrev-ref HEAD
     elif [ "$@" = "backout" ]; then
         git revert
+    elif [ "$@" = "summary" ]; then
+	git show -s
     fi
 }
 
