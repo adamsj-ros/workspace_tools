@@ -41,6 +41,8 @@ hg()
         git revert
     elif [ "$@" = "summary" ]; then
 	git show -s
+    elif [ "$@" = "id" ]; then
+	git describe --abbrev=12 --always --dirty=+
     fi
 }
 
