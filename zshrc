@@ -109,6 +109,8 @@ if [ `uname` = "Darwin" ];then
 	export PATH=$PATH:/usr/local/opt/qt/bin
 	export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
 	export PATH=$HOME/bin/kdiff3.app/Contents/MacOS:$PATH
+elif [ `uname` = "Linux" ];then
+	source $HOME/OpenDDS/setenv.sh
 fi
 
 export PATH=$HOME/bin/:$PATH

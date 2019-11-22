@@ -1,10 +1,12 @@
 if [ `uname` = "Darwin" ];then
     alias edit='open -a "Visual Studio Code"'
 elif [ `uname` = "Linux" ];then
-    alias edit='gedit'
+    alias edit='code'
+    alias rm='trash'
 fi
 
-alias ltr='ls -latr'
+alias latr='ls -latr'
+alias ltr='ls -ltr'
 
 alias ec='edit ~/.zshrc'
 alias sc='source ~/.zshrc'
@@ -14,6 +16,11 @@ alias ea='edit ~/.zsh_aliases'
 alias va='cat ~/.zsh_aliases'
 
 alias mkdir='mkdir -p'
+
+alias rbil='rm -rf build install log'
+
+alias findcpp='find . -type f -name "*.cpp" -o -name "*.c" -o -name "*.hpp" -o -name "*.h"'
+alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"'
 
 #https://github.com/sympy/sympy/wiki/Git-hg-rosetta-stone
 hg()
@@ -43,6 +50,8 @@ hg()
 	git show -s
     elif [ "$@" = "id" ]; then
 	git describe --abbrev=12 --always --dirty=+
+    elif [ "$@" = "id2" ]; then
+	git rev-parse HEAD
     fi
 }
 
