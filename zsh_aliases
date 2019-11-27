@@ -2,8 +2,9 @@ if [ `uname` = "Darwin" ];then
     alias edit='open -a "Visual Studio Code"'
 elif [ `uname` = "Linux" ];then
     alias edit='code'
-    alias rm='trash'
 fi
+
+alias rm='trash'
 
 alias latr='ls -latr'
 alias ltr='ls -ltr'
