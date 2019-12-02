@@ -4,6 +4,10 @@ elif [ `uname` = "Linux" ];then
     alias edit='code'
 fi
 
+TXTRED=$(tput setaf 1) # Red
+TXTGRN=$(tput setaf 2) # Green
+TXTRST=$(tput sgr0) # Text reset.
+
 alias rm='trash'
 
 alias latr='ls -latr'
@@ -22,6 +26,9 @@ alias va='cat ~/.zsh_aliases'
 alias mkdir='mkdir -p'
 
 alias rbil='rm -rf build install log'
+
+alias sros2='source /opt/ros/eloquent/setup.zsh'
+
 
 ignore()
 {
@@ -77,6 +84,32 @@ find_ignore()
 #}
 alias findcpp='find . -type f -name "*.cpp" -o -name "*.c" -o -name "*.hpp" -o -name "*.h"'
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"'
+alias findsyml='ls -lR . | grep ^l'
+alias findgit='find . -name ".git"'
+
+all_git_repos()
+{
+    gitcommand=""
+    while getopts ":s" opt; do
+    case ${opt} in 
+        s )
+            gitcommand="status --short"
+        ;;
+        \? )
+            echo "options: [-s] (status)"
+            return
+        ;;
+    esac
+    done
+
+    for x in $(findgit); do
+        pushd $(dirname $x) &>/dev/null
+        echo -e "${TXTGRN}$(basename $(dirname $x))${TXTRST}"
+        /usr/bin/git status --short
+        popd &>/dev/null
+    done
+
+}
 
 #https://github.com/sympy/sympy/wiki/Git-hg-rosetta-stone
 hg()
