@@ -23,6 +23,50 @@ alias mkdir='mkdir -p'
 
 alias rbil='rm -rf build install log'
 
+ignore()
+{
+    file_path="."
+    command="echo"
+    while getopts ":p:ra" opt; do
+    case ${opt} in
+        p ) 
+            file_path=$OPTARG
+        ;;
+        r )
+            command="rm" 
+        ;;
+        a )
+            command="touch" 
+        ;;
+        \? ) echo "options: [-p] path/to/start [-r] (remove ignore files) [-a] (add ignore files)"
+        return
+        ;;
+    esac
+    done
+
+
+    for x in $(find $file_path -name "CMakeLists.txt"); do
+        ignore_path=$(dirname $x)
+        $command $ignore_path/COLCON_IGNORE
+        $command $ignore_path/AMENT_IGNORE
+    done
+}
+
+add_ignore()
+{
+    ignore -a $@
+}
+
+rm_ignore()
+{
+    ignore -r $@
+}   
+
+find_ignore()
+{
+    find . -name "*IGNORE"
+}
+
 #findcpp2()
 #{
 #	path="."
