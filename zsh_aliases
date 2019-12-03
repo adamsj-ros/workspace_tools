@@ -93,7 +93,7 @@ all_git_repos()
     while getopts ":s" opt; do
     case ${opt} in 
         s )
-            gitcommand="status --short"
+            gitcommand="status -s"
         ;;
         \? )
             echo "options: [-s] (status)"
@@ -105,7 +105,7 @@ all_git_repos()
     for x in $(findgit); do
         pushd $(dirname $x) &>/dev/null
         echo -e "${TXTGRN}$(basename $(dirname $x))${TXTRST}"
-        /usr/bin/git status --short
+        git $(echo $gitcommand)
         popd &>/dev/null
     done
 
