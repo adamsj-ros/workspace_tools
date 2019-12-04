@@ -102,6 +102,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 source ~/.zsh_aliases
+
 if [ `uname` = "Darwin" ];then
 	#echo "I'm on a mac"
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
@@ -116,3 +117,5 @@ fi
 export PATH=$HOME/bin/:$PATH
 
 #source $HOME/ros2_dashing/ros2-osx/setup.zsh
+
+setopt shwordsplit

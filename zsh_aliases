@@ -8,27 +8,29 @@ TXTRED=$(tput setaf 1) # Red
 TXTGRN=$(tput setaf 2) # Green
 TXTRST=$(tput sgr0) # Text reset.
 
+#file system
 alias rm='trash'
-
+alias mkdir='mkdir -p'
 alias latr='ls -latr'
 alias ltr='ls -ltr'
 
+#shell updates
 alias ec='edit ~/.zshrc'
 alias sc='source ~/.zshrc'
 alias vc='cat ~/.zshrc'
+alias ea='edit ~/.zsh_aliases'
+alias va='cat ~/.zsh_aliases'
+#http://zsh.sourceforge.net/FAQ/zshfaq03.html
+alias ssplit='setopt shwordsplit'
+alias usplit='unsetopt shwordsplit'
 
+#opendds
 alias sd='source ~/OpenDDS/setenv.sh'
 alias envd='env|grep DDS'
 
-alias ea='edit ~/.zsh_aliases'
-alias va='cat ~/.zsh_aliases'
-
-alias mkdir='mkdir -p'
-
+#ros2
 alias rbil='rm -rf build install log'
-
 alias sros2='source /opt/ros/eloquent/setup.zsh'
-
 
 ignore()
 {
