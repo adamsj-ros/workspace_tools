@@ -1,6 +1,5 @@
 if [ `uname` = "Darwin" ];then
     alias edit='open -a "Visual Studio Code"'
-    alias bcomp='open -a "Beyond Compare"'
 elif [ `uname` = "Linux" ];then
     alias edit='code'
 fi
