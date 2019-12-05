@@ -32,6 +32,12 @@ alias envd='env|grep DDS'
 alias rbil='rm -rf build install log'
 alias sros2='source /opt/ros/eloquent/setup.zsh'
 
+#docker
+alias dps='docker ps -a'
+alias dr='docker run -it --rm'
+alias de='docker exec -it'
+alias di='docker images'
+
 ignore()
 {
     file_path="."
