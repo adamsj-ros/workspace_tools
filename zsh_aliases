@@ -37,6 +37,7 @@ alias dps='docker ps -a'
 alias dr='docker run -it --rm'
 alias de='docker exec -it'
 alias di='docker images'
+alias dst='docker stop'
 
 ignore()
 {
@@ -152,5 +153,20 @@ hg()
     fi
 }
 
-alias hw='echo hello world'
- 
+printlines()
+{
+    if [ $# -ne 3 ];then
+        echo "usage: printlines firstline secondline filename"
+        return
+    fi
+    sed -n "${1},${2}p" $3
+} 
+
+printline()
+{
+    if [ $# -ne 2 ];then
+        echo "usage: printline linenum filename"
+        return
+    fi
+    printlines $1 $1 $2
+}
