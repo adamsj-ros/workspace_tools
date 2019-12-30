@@ -110,6 +110,7 @@ if [ `uname` = "Darwin" ];then
 	export PATH=$PATH:/usr/local/opt/qt/bin
 	export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
 	export PATH=$HOME/bin/kdiff3.app/Contents/MacOS:$PATH
+	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 elif [ `uname` = "Linux" ];then
 	source $HOME/OpenDDS/setenv.sh
 fi
@@ -120,3 +121,5 @@ export PATH=$HOME/opendds_ros2_docker:$PATH
 #source $HOME/ros2_dashing/ros2-osx/setup.zsh
 
 setopt shwordsplit
+
+
