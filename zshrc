@@ -116,7 +116,7 @@ elif [ `uname` = "Linux" ];then
 fi
 
 export PATH=$HOME/bin/:$PATH
-export PATH=$HOME/opendds_ros2_docker:$PATH
+export PATH=$HOME/workspace_tools/:$PATH
 
 #source $HOME/ros2_dashing/ros2-osx/setup.zsh
 
