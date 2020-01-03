@@ -30,6 +30,7 @@ alias envd='env|grep DDS'
 
 #ros2
 alias rbil='rm -rf build install log'
+alias rbi='rm -rf build install'
 alias sros2='source /opt/ros/eloquent/setup.zsh'
 
 #docker
