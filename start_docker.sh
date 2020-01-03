@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-file_path=$HOME
+file_path=`pwd`
 container="opendds-e"
 image="adamsjoci/opendds_ros2_docker:latest"
 start_container="no"
