@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 file_path=`pwd`
 container="opendds-e"
-image="adamsjoci/opendds_ros2_docker:latest"
+image="objectcomputing/opendds_ros2:latest"
 start_container="no"
 while getopts ":hp:c:i:s" opt; do
 case ${opt} in
