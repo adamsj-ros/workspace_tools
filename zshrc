@@ -126,8 +126,6 @@ fi
 export PATH=$HOME/bin/:$PATH
 export PATH=$HOME/workspace_tools/:$PATH
 
-#source $HOME/ros2_dashing/ros2-osx/setup.zsh
-
 setopt shwordsplit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
