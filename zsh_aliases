@@ -39,6 +39,8 @@ alias dr='docker run -it --rm'
 alias de='docker exec -it'
 alias di='docker images'
 alias dst='docker stop'
+alias drm='docker rm'
+alias drmi='docker rmi'
 
 ignore()
 {
