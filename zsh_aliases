@@ -99,6 +99,7 @@ alias findcpp='find . -type f -name "*.cpp" -o -name "*.c" -o -name "*.hpp" -o -
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"'
 alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"'
+alias findpack='find . -name "package.xml"'
 
 all_git_repos()
 {
