@@ -1,5 +1,6 @@
 if [ `uname` = "Darwin" ];then
     alias edit='open -a "Visual Studio Code"'
+    alias gkr='open -a "GitKraken"'
 elif [ `uname` = "Linux" ];then
     alias edit='code'
 fi
@@ -102,13 +103,16 @@ alias findgit='find . -name ".git"'
 all_git_repos()
 {
     gitcommand=""
-    while getopts ":s" opt; do
+    while getopts ":sp" opt; do
     case ${opt} in 
         s )
             gitcommand="status -s"
         ;;
+        p )
+            gitcommand="remote -v"
+        ;;
         \? )
-            echo "options: [-s] (status)"
+            echo "options: [-s] (status) [-p] (paths)"
             return
         ;;
     esac
