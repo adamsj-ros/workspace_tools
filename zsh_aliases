@@ -101,10 +101,13 @@ alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"'
 alias findpack='find . -name "package.xml"'
 
+#https://stackoverflow.com/questions/48341920/git-branch-command-behaves-like-less
+git config --global pager.branch false
+git config --global pager.show false
 all_git_repos()
 {
     gitcommand=""
-    while getopts ":spb" opt; do
+    while getopts ":spbh" opt; do
     case ${opt} in 
         s )
             gitcommand="status -s"
@@ -115,8 +118,11 @@ all_git_repos()
         b )
             gitcommand="branch -a"
         ;;
+        h )
+            gitcommand="show -s"
+        ;;
         \? )
-            echo "options: [-s] (status) [-p] (paths) [-b] (branches)"
+            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-h] (show)"
             return
         ;;
     esac
