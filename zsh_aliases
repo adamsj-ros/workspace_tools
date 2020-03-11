@@ -104,7 +104,7 @@ alias findpack='find . -name "package.xml"'
 all_git_repos()
 {
     gitcommand=""
-    while getopts ":sp" opt; do
+    while getopts ":spb" opt; do
     case ${opt} in 
         s )
             gitcommand="status -s"
@@ -112,8 +112,11 @@ all_git_repos()
         p )
             gitcommand="remote -v"
         ;;
+        b )
+            gitcommand="branch -a"
+        ;;
         \? )
-            echo "options: [-s] (status) [-p] (paths)"
+            echo "options: [-s] (status) [-p] (paths) [-b] (branches)"
             return
         ;;
     esac
