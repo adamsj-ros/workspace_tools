@@ -107,7 +107,7 @@ git config --global pager.show false
 all_git_repos()
 {
     gitcommand=""
-    while getopts ":spbh" opt; do
+    while getopts ":spbS" opt; do
     case ${opt} in 
         s )
             gitcommand="status -s"
@@ -118,11 +118,11 @@ all_git_repos()
         b )
             gitcommand="branch -a"
         ;;
-        h )
+        S )
             gitcommand="show -s"
         ;;
         \? )
-            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-h] (show)"
+            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-S] (show)"
             return
         ;;
     esac
