@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 file_path=`pwd`
-container="opendds-e"
+container=`basename $file_path`"_opendds-e"
 image="objectcomputing/opendds_ros2:latest"
 start_container="no"
 while getopts ":hp:c:i:s" opt; do
