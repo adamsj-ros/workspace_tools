@@ -1,6 +1,14 @@
 if [ `uname` = "Darwin" ];then
     alias edit='open -a "Visual Studio Code"'
-    alias gkr='open -a "GitKraken"'
+    alias gitkr='/Applications/GitKraken.app/Contents/MacOS/GitKraken&'
+    gitkr_open()
+    {
+        if [ $# -ne 1 ];then
+            echo "usage: gitkr_open /path/to/git/repo"
+            return
+        fi
+        /Applications/GitKraken.app/Contents/MacOS/GitKraken -p $1 &
+    }
 elif [ `uname` = "Linux" ];then
     alias edit='code'
 fi
@@ -30,8 +38,8 @@ alias sd='source ~/OpenDDS/setenv.sh'
 alias envd='env|grep DDS'
 
 #ros2
-alias rbil='rm -rf build install log'
-alias rbi='rm -rf build install'
+alias rbil='rm -rf build;rm -rf log; rm -rf install*'
+alias rbi='rm -rf build; rm -rf install*'
 alias sros2='source /opt/ros/eloquent/setup.zsh'
 
 #docker
@@ -42,6 +50,9 @@ alias di='docker images'
 alias dst='docker stop'
 alias drm='docker rm'
 alias drmi='docker rmi'
+
+#other
+alias less='less -N'
 
 ignore()
 {
@@ -72,17 +83,17 @@ ignore()
     done
 }
 
-add_ignore()
+addignore()
 {
     ignore -a $@
 }
 
-rm_ignore()
+rmignore()
 {
     ignore -r $@
-}   
+}  
 
-find_ignore()
+findignore()
 {
     find . -name "*IGNORE"
 }
@@ -95,6 +106,7 @@ find_ignore()
 #	fi
 #	find $path -type f -name "*.cpp" -o -name "*.c" -o -name "*.hpp" -o -name "*.h"
 #}
+
 alias findcpp='find . -type f -name "*.cpp" -o -name "*.c" -o -name "*.hpp" -o -name "*.h"'
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"'
 alias findsyml='ls -lR . | grep ^l'
