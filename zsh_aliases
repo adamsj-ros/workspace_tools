@@ -17,9 +17,13 @@ TXTRED=$(tput setaf 1) # Red
 TXTGRN=$(tput setaf 2) # Green
 TXTRST=$(tput sgr0) # Text reset.
 
-#file system
+#reset built-in commands
+alias cat='bat'
 alias rm='trash'
 alias mkdir='mkdir -p'
+alias less='less -N'
+
+#file system
 alias latr='ls -latr'
 alias ltr='ls -ltr'
 
@@ -50,9 +54,6 @@ alias di='docker images'
 alias dst='docker stop'
 alias drm='docker rm'
 alias drmi='docker rmi'
-
-#other
-alias less='less -N'
 
 ignore()
 {
