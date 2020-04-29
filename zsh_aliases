@@ -120,7 +120,8 @@ git config --global pager.show false
 all_git_repos()
 {
     gitcommand=""
-    while getopts ":spbS" opt; do
+    pipe=""
+    while getopts ":spbSH" opt; do
     case ${opt} in 
         s )
             gitcommand="status -s"
@@ -134,8 +135,12 @@ all_git_repos()
         S )
             gitcommand="show -s"
         ;;
-        \? )
-            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-S] (show)"
+        H )
+            gitcommand="show -s"
+            pipe="|grep -B 1 commit"
+        ;;
+        ? )
+            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-S] (show) [-H] (show hashes)"
             return
         ;;
     esac
@@ -144,7 +149,7 @@ all_git_repos()
     for x in $(findgit); do
         pushd $(dirname $x) &>/dev/null
         echo -e "${TXTGRN}$(basename $(dirname $x))${TXTRST}"
-        git $(echo $gitcommand)
+        eval git $gitcommand$pipe
         popd &>/dev/null
     done
 
