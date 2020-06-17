@@ -61,14 +61,14 @@ ignore()
     command="echo"
     while getopts ":p:ra" opt; do
     case ${opt} in
-        p ) 
+        p )
             file_path=$OPTARG
         ;;
         r )
-            command="rm" 
+            command="rm"
         ;;
         a )
-            command="touch" 
+            command="touch"
         ;;
         \? ) echo "options: [-p] path/to/start [-r] (remove ignore files) [-a] (add ignore files)"
         return
@@ -92,7 +92,7 @@ addignore()
 rmignore()
 {
     ignore -r $@
-}  
+}
 
 findignore()
 {
@@ -121,8 +121,8 @@ all_git_repos()
 {
     gitcommand=""
     pipe=""
-    while getopts ":spbSH" opt; do
-    case ${opt} in 
+    while getopts ":spbBSH" opt; do
+    case ${opt} in
         s )
             gitcommand="status -s"
         ;;
@@ -132,6 +132,10 @@ all_git_repos()
         b )
             gitcommand="branch -a"
         ;;
+        B )
+            gitcommand="branch -a"
+            pipe="|grep \*"
+        ;;
         S )
             gitcommand="show -s"
         ;;
@@ -140,7 +144,7 @@ all_git_repos()
             pipe="|grep -B 1 commit"
         ;;
         ? )
-            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-S] (show) [-H] (show hashes)"
+            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-B] (current branch) [-S] (show) [-H] (show hashes)"
             return
         ;;
     esac
@@ -195,7 +199,7 @@ printlines()
         return
     fi
     sed -n "${1},${2}p" $3
-} 
+}
 
 printline()
 {
