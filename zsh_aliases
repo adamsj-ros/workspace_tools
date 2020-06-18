@@ -45,6 +45,7 @@ alias envd='env|grep DDS'
 alias rbil='rm -rf build;rm -rf log; rm -rf install*'
 alias rbi='rm -rf build; rm -rf install*'
 alias sros2='source /opt/ros/eloquent/setup.zsh'
+alias getrepos='vcs import src <'
 
 #docker
 alias dps='docker ps -a'
@@ -143,8 +144,11 @@ all_git_repos()
             gitcommand="show -s"
             pipe="|grep -B 1 commit"
         ;;
+        r )
+            gitcommand="log --reverse --oneline"
+        ;;
         ? )
-            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-B] (current branch) [-S] (show) [-H] (show hashes)"
+            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-B] (current branch) [-S] (show) [-H] (show hashes) [-r] (log reverse)"
             return
         ;;
     esac
