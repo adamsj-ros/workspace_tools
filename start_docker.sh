@@ -2,28 +2,26 @@
 file_path=`pwd`
 container=`basename $file_path`"_opendds-e"
 image="objectcomputing/opendds_ros2:latest"
-start_container="no"
-while getopts ":hp:c:i:s" opt; do
+while getopts ":hp:c:i:" opt; do
 case ${opt} in
-    p ) 
+    p )
         file_path=$OPTARG
     ;;
-    c ) 
+    c )
         container=$OPTARG
-    ;;    
-    i ) 
+    ;;
+    i )
         image=$OPTARG
-    ;;   
-    s ) 
-        start_container="yes"
-    ;;    
-    h ) echo "options: [-p] path/to/volume/map [-c] container name [-i] image name [-s] start the container then connect"
+    ;;
+    h ) echo "options: [-p] path/to/volume/map [-c] container name [-i] image name"
     exit
     ;;
 esac
 done
 
-if [ $start_container == "yes" ]; then
+docker ps -f "name=$container"|grep -v CONTAINER >/dev/null
+start_container=$?
+if [ $start_container == 1 ]; then
     echo "starting "$container" at "$file_path" from "$image
     docker run -d --rm --name $container -v $file_path:/opt/workspace $image bash -c "while true; do sleep 5; done"
 fi
