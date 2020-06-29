@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 file_path=`pwd`
-container=`basename $file_path`"_opendds-e"
+container=`basename $file_path`"_opendds-f"
 image="objectcomputing/opendds_ros2:latest"
 while getopts ":hp:c:i:" opt; do
 case ${opt} in
