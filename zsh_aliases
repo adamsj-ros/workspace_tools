@@ -40,6 +40,8 @@ alias usplit='unsetopt shwordsplit'
 #opendds
 alias sd='source ~/OpenDDS/setenv.sh'
 alias envd='env|grep DDS'
+alias makeddslog='echo "MAKE DEPEND" > makeall.log;make depend &>> makeall.log; echo "MAKE" >> makeall.log;make &>>makeall.log'
+alias makedds='echo "MAKE DEPEND";make depend; echo "MAKE";make'
 
 #ros2
 alias rbil='rm -rf build;rm -rf log; rm -rf install*'
@@ -55,6 +57,7 @@ alias di='docker images'
 alias dst='docker stop'
 alias drm='docker rm'
 alias drmi='docker rmi'
+alias dpwd="docker inspect -f '{{ .Mounts}}'"
 
 ignore()
 {
