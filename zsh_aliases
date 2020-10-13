@@ -42,11 +42,12 @@ alias usplit='unsetopt shwordsplit'
 #TODO find setenv.sh under current location
 alias sd='source ~/OpenDDS/setenv.sh'
 alias envd='env|grep DDS'
-alias makeddslog='echo "MAKE DEPEND" > makeall.log;make depend &>> makeall.log; echo "MAKE" >> makeall.log;make &>>makeall.log'
-alias makedds='echo "MAKE DEPEND";make depend; echo "MAKE";make'
+alias makeddslog='make &>make.log'
+alias makealldds='echo "MAKE DEPEND";make depend; echo "MAKE";make'
+alias makeallddslog='echo "MAKE DEPEND" > makeall.log;make depend &>> makeall.log; echo "MAKE" >> makeall.log;make &>>makeall.log'
 alias makedds_idl='make opendds_idl && make -t && touch tests/DCPS/Compiler/anonymous_types/classic/testTypeSupport.idl && make'
 alias mpc='mpc.pl'
-alias add_tests='cp GNUmakefile GNUmakefile.orig && mpc DDS.mwc && mv GNUmakefile GNUmakefile.dist && cp GNUmakefile.orig GNUmakefile'
+alias dds_add_tests='cp GNUmakefile GNUmakefile.orig && mpc DDS.mwc && mv GNUmakefile GNUmakefile.dist && cp GNUmakefile.orig GNUmakefile'
 
 #ros2
 alias rbil='rm -rf build;rm -rf log; rm -rf install*'
