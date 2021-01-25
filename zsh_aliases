@@ -1,6 +1,6 @@
 if [ `uname` = "Darwin" ];then
     alias edit='open -a "Visual Studio Code"'
-    alias gitkr='/Applications/GitKraken.app/Contents/MacOS/GitKraken&'
+    alias gitkr='/Applications/GitKraken.app/Contents/MacOS/GitKraken'
     gitkr_open()
     {
         if [ $# -ne 1 ];then
@@ -23,6 +23,7 @@ alias rm='trash'
 alias mkdir='mkdir -p'
 alias less='less -N'
 alias grep='grep -n --color=always'
+alias tail='tail -f'
 
 #file system
 alias latr='ls -latr'

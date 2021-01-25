@@ -2,7 +2,7 @@
 file_path=`pwd`
 dds_volume_map=""
 container=`basename $file_path`"_opendds-f"
-image="objectcomputing/opendds_ros2:latest"
+image="objectcomputing/opendds_ros2:DDS-3.15"
 while getopts ":hp:c:i:d:" opt; do
 case ${opt} in
     p )
