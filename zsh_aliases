@@ -110,14 +110,34 @@ findignore()
     find . -name "*IGNORE"
 }
 
-#findcpp2()
-#{
-#	path="."
-#	if [ "$1" != "" ];then
-#	     path=$1
-#	fi
-#	find $path -type f -name "*.cpp" -o -name "*.c" -o -name "*.hpp" -o -name "*.h"
-#}
+findexts()
+{
+    # set -x
+    # echo $#
+    if [ $# -lt 1 ];then
+        echo "usage: findexts first_ext second_ext ..."
+        echo "ex: findexts cpp hpp h c"
+        return
+    fi
+
+    find_list="-name \"*."
+    count=1
+    for var in "$@"
+    do
+        # echo "$var"
+        #if one or last one
+        if [ $# -eq $count ];then
+            find_list=$find_list$var"\""
+        #if more than one
+        else
+            find_list=$find_list$var"\" -o -name \"*."
+        fi
+        count="$(($count+1))"
+
+    done
+
+	eval find . -type f  $find_list
+}
 
 alias findcpp='find . -type f -name "*.cpp" -o -name "*.c" -o -name "*.hpp" -o -name "*.h"|sort'
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
