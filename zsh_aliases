@@ -200,31 +200,44 @@ hg()
 {
 #    echo $@
     if [ "$@" = "paths" ]; then
+        echo "git remote -v"
         git remote -v
     elif [ "$@" = "status" ]; then
+        echo "git status"
         git status
     elif [ "$@" = "push" ]; then
+        echo "git push"
         git push
     elif [ "$@" = "pull" ]; then
+        echo "git fetch"
         git fetch
     elif [ "$@" = "revert -a" ]; then
+        echo "git reset --hard"
         git reset --hard
     elif [ "$@" = "revert" ]; then
+        echo "git reset"
         git reset
     elif [ "$@" = "update" ]; then
+        echo "git checkout"
         git checkout
     elif [ "$@" = "branches" ]; then
+        echo "git branch -a"
         git branch -a
     elif [ "$@" = "branch" ]; then
+        echo "git rev-parse --abbrev-ref HEAD"
         git rev-parse --abbrev-ref HEAD
     elif [ "$@" = "backout" ]; then
+        echo "git revert"
         git revert
     elif [ "$@" = "summary" ]; then
-	git show -s
+        echo "git show -s"
+        git show -s
     elif [ "$@" = "id" ]; then
-	git describe --abbrev=12 --always --dirty=+
+    	echo "git describe --abbrev=12 --always --dirty=+"
+    	git describe --abbrev=12 --always --dirty=+
     elif [ "$@" = "id2" ]; then
-	git rev-parse HEAD
+	    echo "git rev-parse HEAD"
+	    git rev-parse HEAD
     fi
 }
 
