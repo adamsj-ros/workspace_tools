@@ -110,36 +110,36 @@ findignore()
     find . -name "*IGNORE"
 }
 
-findexts()
+lle()
 {
     # set -x
     # echo $#
     if [ $# -lt 1 ];then
         echo "usage: findexts first_ext second_ext ..."
-        echo "ex: findexts cpp hpp h c"
+        echo "ex: lle cpp hpp h c"
         return
     fi
 
-    find_list="-name \"*."
+    find_list="**/*."
     count=1
     for var in "$@"
     do
         # echo "$var"
         #if one or last one
         if [ $# -eq $count ];then
-            find_list=$find_list$var"\""
+            find_list=$find_list$var
         #if more than one
         else
-            find_list=$find_list$var"\" -o -name \"*."
+            find_list=$find_list$var" **/*."
         fi
         count="$(($count+1))"
 
     done
 
-	eval find . -type f  $find_list
+	eval ll  $find_list
 }
 
-alias findcpp='findexts cpp c hpp h|sort'
+alias findcpp='lle cpp c hpp h|sort'
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
 alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"|sort'
