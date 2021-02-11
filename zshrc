@@ -77,7 +77,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-    git 
+    git
     docker
     )
 
@@ -116,8 +116,10 @@ if [ `uname` = "Darwin" ];then
 	export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 	export CMAKE_PREFIX_PATH=$CMAKE_PREFIX_PATH:/usr/local/opt/qt
 	export PATH=$PATH:/usr/local/opt/qt/bin
-	export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
+	export OPENSSL_ROOT_DIR=$(brew --prefix openssl)
 	export PATH=$HOME/bin/kdiff3.app/Contents/MacOS:$PATH
+	export PATH=/usr/local/sbin:$PATH
+	. $HOME/ros2_foxy/ros2-osx/setup.zsh &> /dev/null
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 elif [ `uname` = "Linux" ];then
 	source $HOME/OpenDDS/setenv.sh
@@ -130,3 +132,6 @@ setopt shwordsplit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# export PATH="/usr/local/opt/python@3.7/bin:$PATH"
+# export PKG_CONFIG_PATH="/usr/local/opt/python@3.7/lib/pkgconfig"
+# export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
