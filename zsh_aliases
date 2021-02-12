@@ -65,6 +65,7 @@ alias dst='docker stop'
 alias drm='docker rm'
 alias drmi='docker rmi'
 alias dpwd="docker inspect -f '{{ .Mounts}}'"
+alias dinu='docker rmi $(docker images -f "dangling=true" -q)'
 
 ignore()
 {
@@ -113,24 +114,36 @@ findignore()
 lle()
 {
     # set -x
-    # echo $#
+    # echo "#="$#
     if [ $# -lt 1 ];then
-        echo "usage: findexts first_ext second_ext ..."
+        echo "usage: lle [dir] first_ext second_ext ..."
         echo "ex: lle cpp hpp h c"
+        echo "ex: lle . cpp hpp h c"
         return
     fi
 
-    find_list="**/*."
+    directory="."
+    argcount=$#
+    if [ -d $1 ];then
+        echo $1" is a dir"
+        directory=$1
+        argcount="$(($argcount-1))"
+        set -- "${@:2}"
+    fi
+
+    find_list=$directory"/**/*."
     count=1
+    # echo "count="$count
+    # echo "arcount="$argcount
     for var in "$@"
     do
         # echo "$var"
         #if one or last one
-        if [ $# -eq $count ];then
+        if [ $argcount -eq $count ];then
             find_list=$find_list$var
         #if more than one
         else
-            find_list=$find_list$var" **/*."
+            find_list=$find_list$var" "$directory"/**/*."
         fi
         count="$(($count+1))"
 
