@@ -2,9 +2,13 @@
 file_path=`pwd`
 dds_volume_map=""
 container=`basename $file_path`"_opendds-f"
-image="objectcomputing/opendds_ros2:DDS-3.15"
+image="objectcomputing/opendds_ros2"
+tag="latest"
+imagetag=$image":"$tag
+prev_image=$image
+prev_tag=$tag
 nethost=""
-while getopts ":hp:c:i:d:n" opt; do
+while getopts ":hp:c:i:d:nt:b:" opt; do
 case ${opt} in
     p )
         file_path=$OPTARG
@@ -21,16 +25,29 @@ case ${opt} in
     n )
         nethost="--net=host"
     ;;
-    h ) echo "options: [-p] path/to/volume/map [-c] container name [-i] image name [-d] dds source path [-n] use --net=host option to share host network"
+    t )
+        tag=$OPTARG
+    ;;
+    b )
+        imagetag=$OPTARG
+    ;;
+    h )
+        printf "options:\n [-i] image name\n [-t] change tag\n [-b] both image and tag\n [-c] container name\n [-p] path/to/volume/map\n [-d] dds source path\n [-n] use --net=host option to share host network\n"
     exit
     ;;
 esac
 done
 
+echo $imagetag
+if [ $image != $prev_image ] || [ $tag != $prev_tag ];then
+    imagetag=$image":"$tag
+    echo "changing imagetag"
+fi
+
 docker ps -f "name=$container"|grep -v CONTAINER >/dev/null
 start_container=$?
 if [ $start_container == 1 ]; then
-    echo "starting "$container" at "$file_path" from "$image
-    docker run $nethost -d --rm --name $container $dds_volume_map -v $file_path:/opt/workspace $image bash -c "while true; do sleep 5; done"
+    echo "starting "$container" at "$file_path" from "$imagetag
+    docker run $nethost -d --rm --name $container $dds_volume_map -v $file_path:/opt/workspace $imagetag bash -c "while true; do sleep 5; done"
 fi
 docker exec -it $container bash

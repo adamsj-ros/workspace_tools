@@ -35,6 +35,8 @@ alias sc='source ~/.zshrc'
 alias vc='cat ~/.zshrc'
 alias ea='edit ~/.zsh_aliases'
 alias va='cat ~/.zsh_aliases'
+alias es='edit ~/workspace_tools/start_docker.sh'
+alias vs='cat ~/workspace_tools/start_docker.sh'
 #http://zsh.sourceforge.net/FAQ/zshfaq03.html
 alias ssplit='setopt shwordsplit'
 alias usplit='unsetopt shwordsplit'
