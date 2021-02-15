@@ -32,7 +32,7 @@ case ${opt} in
         imagetag=$OPTARG
     ;;
     h )
-        printf "defaults:\n image = %s\n tag = %s\n" $image $tag
+        printf "defaults:\n image = %s\n tag = %s\n both = %s\n container = %s\n path = %s\n dds path = %s\n net host = %s\n" $image $tag $imagetag $container $file_path $dds_volume_map $nethost
         printf "options:\n [-i] image name\n [-t] change tag\n [-b] both image and tag\n [-c] container name\n [-p] path/to/volume/map\n [-d] dds source path\n [-n] use --net=host option to share host network\n"
     exit
     ;;
