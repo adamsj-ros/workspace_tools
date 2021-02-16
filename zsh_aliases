@@ -125,33 +125,18 @@ lle()
     fi
 
     directory="."
-    argcount=$#
     if [ -d $1 ];then
         echo $1" is a dir"
         directory=$1
-        argcount="$(($argcount-1))"
         set -- "${@:2}"
     fi
 
-    find_list=$directory"/**/*."
-    count=1
-    # echo "count="$count
-    # echo "arcount="$argcount
     for var in "$@"
     do
         # echo "$var"
-        #if one or last one
-        if [ $argcount -eq $count ];then
-            find_list=$find_list$var
-        #if more than one
-        else
-            find_list=$find_list$var" "$directory"/**/*."
-        fi
-        count="$(($count+1))"
+        eval ll $directory"/**/*."$var
 
     done
-
-	eval ll  $find_list
 }
 
 alias findcpp='lle cpp c hpp h|sort'
