@@ -139,7 +139,15 @@ lle()
     done
 }
 
-alias findcpp='lle cpp c hpp h|sort'
+findcpp()
+{
+    if [ -d $1 ];then
+        lle $1 cpp c hpp h|sort
+    else
+        lle cpp c hpp h|sort
+    fi
+}
+
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
 alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"|sort'
