@@ -46,16 +46,16 @@ case ${opt} in
 esac
 done
 
-echo "default image:tag = "$imagetag
-if [ $image != $prev_image ] || [ $tag != $prev_tag ];then
-    imagetag=$image":"$tag
-    echo "changing image:tag to "$imagetag
-fi
-
 docker ps -f "name=$container"|grep -v CONTAINER >/dev/null
 start_container=$?
 if [ $start_container == 1 ]; then
     echo "starting "$container" at "$file_path" from "$imagetag
+    if [ $image != $prev_image ] || [ $tag != $prev_tag ];then
+        imagetag=$image":"$tag
+        echo "changing image:tag to "$imagetag
+    else
+        echo "using default image:tag = "$imagetag
+    fi
     docker run $nethost -d --rm --name $container $dds_volume_map -v $file_path:/opt/workspace $imagetag bash -c "while true; do sleep 5; done"
 fi
 docker exec -it $container bash
