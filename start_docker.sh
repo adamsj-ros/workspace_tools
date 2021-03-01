@@ -58,4 +58,4 @@ if [ $start_container == 1 ]; then
     echo "starting "$container" at "$file_path" from "$imagetag
     docker run $nethost -d --rm --name $container $dds_volume_map -v $file_path:/opt/workspace $imagetag bash -c "while true; do sleep 5; done"
 fi
-docker exec -it $container bash
+docker exec -it -w /opt/workspace $container bash

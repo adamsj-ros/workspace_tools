@@ -9,6 +9,7 @@ if [ `uname` = "Darwin" ];then
         fi
         /Applications/GitKraken.app/Contents/MacOS/GitKraken -p $1 &
     }
+    alias readelf='objdump'
 elif [ `uname` = "Linux" ];then
     alias edit='code'
 fi
