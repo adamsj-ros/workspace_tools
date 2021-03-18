@@ -8,9 +8,9 @@ usage()
 
 file_path=`pwd`
 dds_volume_map=""
-container=`basename $file_path`"_opendds-f"
-image="objectcomputing/opendds_ros2"
-tag="latest"
+container=`basename $file_path`"-container"
+image="ros"
+tag="foxy"
 imagetag=$image":"$tag
 prev_image=$image
 prev_tag=$tag
