@@ -20,7 +20,7 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# a theme from this variable instead of looking in $ZSH/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
@@ -41,7 +41,7 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
+# DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -53,7 +53,9 @@ ZSH_THEME=powerlevel10k/powerlevel10k
 ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
+# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -135,3 +137,4 @@ setopt shwordsplit
 # export PATH="/usr/local/opt/python@3.7/bin:$PATH"
 # export PKG_CONFIG_PATH="/usr/local/opt/python@3.7/lib/pkgconfig"
 # export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
+export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1
