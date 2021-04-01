@@ -10,8 +10,10 @@ if [ `uname` = "Darwin" ];then
         /Applications/GitKraken.app/Contents/MacOS/GitKraken -p $1 &
     }
     alias readelf='objdump'
+    alias cat='bat'
 elif [ `uname` = "Linux" ];then
-    alias edit='code'
+    alias edit='/usr/share/code/code'
+    alias cat='batcat'
 fi
 
 TXTRED=$(tput setaf 1) # Red
@@ -19,7 +21,6 @@ TXTGRN=$(tput setaf 2) # Green
 TXTRST=$(tput sgr0) # Text reset.
 
 #reset built-in commands
-alias cat='bat'
 alias rm='trash'
 alias mkdir='mkdir -p'
 alias less='less -N'
