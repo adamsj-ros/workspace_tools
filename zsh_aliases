@@ -64,7 +64,7 @@ ignore()
 {
     file_path="."
     command="echo"
-    while getopts ":p:ra" opt; do
+    while getopts ":p:rah" opt; do
     case ${opt} in
         p )
             file_path=$OPTARG
@@ -75,7 +75,7 @@ ignore()
         a )
             command="touch"
         ;;
-        \? ) echo "options: [-p] path/to/start [-r] (remove ignore files) [-a] (add ignore files)"
+        h ) echo "options: [-p] path/to/start [-r] (remove ignore files) [-a] (add ignore files)"
         return
         ;;
     esac
