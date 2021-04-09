@@ -123,8 +123,7 @@ if [ `uname` = "Darwin" ];then
 	export PATH=/usr/local/sbin:$PATH
 	. $HOME/ros2_foxy/ros2-osx/setup.zsh &> /dev/null
 	test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-elif [ `uname` = "Linux" ];then
-	source $HOME/OpenDDS/setenv.sh
+# elif [ `uname` = "Linux" ];then
 fi
 
 export PATH=$HOME/bin/:$PATH
@@ -134,7 +133,4 @@ setopt shwordsplit
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-# export PATH="/usr/local/opt/python@3.7/bin:$PATH"
-# export PKG_CONFIG_PATH="/usr/local/opt/python@3.7/lib/pkgconfig"
-# export LDFLAGS="-L/usr/local/opt/python@3.7/lib"
 export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1

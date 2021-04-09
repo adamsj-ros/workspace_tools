@@ -57,7 +57,7 @@ alias dds_add_tests='cp GNUmakefile GNUmakefile.orig && mpc DDS.mwc && mv GNUmak
 #ros2
 alias rbil='rm -rf build;rm -rf log; rm -rf install*'
 alias rbi='rm -rf build; rm -rf install*'
-alias sros2='source /opt/ros/eloquent/setup.zsh'
+alias sros2='source /opt/ros/foxy/setup.zsh'
 alias getrepos='vcs import src <'
 
 #docker
