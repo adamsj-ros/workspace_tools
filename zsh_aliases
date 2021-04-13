@@ -59,6 +59,7 @@ alias drm='docker rm'
 alias drmi='docker rmi'
 alias dpwd="docker inspect -f '{{ .Mounts}}'"
 alias dinu='docker rmi $(docker images -f "dangling=true" -q)'
+alias dcp='docker container prune'
 
 ignore()
 {
@@ -143,6 +144,7 @@ alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
 alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"|sort'
 alias findpack='find . -name "package.xml"|sort'
+alias findchange='find . -name "CHANGELOG.rst"|sort'
 
 #https://stackoverflow.com/questions/48341920/git-branch-command-behaves-like-less
 git config --global pager.branch false
