@@ -46,6 +46,7 @@ case ${opt} in
 esac
 done
 
+
 docker ps -f "name=$container"|grep -v CONTAINER >/dev/null
 start_container=$?
 if [ $start_container == 1 ]; then
@@ -56,6 +57,14 @@ if [ $start_container == 1 ]; then
         echo "using default image:tag = "$imagetag
     fi
     echo "starting "$container" at "$file_path" from "$imagetag
-    docker run $nethost -d --rm --name $container $dds_volume_map -v $file_path:/opt/workspace $imagetag bash -c "while true; do sleep 5; done"
+    if [ `uname` = "Darwin" ];then
+        docker run $nethost -d --rm --name $container $dds_volume_map -v $file_path:/opt/workspace $imagetag bash -c "while true; do sleep 5; done"
+    elif [ `uname` = "Linux" ];then
+        #https://github.com/osrf/rocker#installation
+        rocker --home --name $container --network host --nvidia --ssh --user --x11 $imagetag bash
+    fi
 fi
-docker exec -it -w /opt/workspace $container bash
+
+if [[ `uname` = "Darwin" || ( $start_container == 0 && `uname` = "Linux" ) ]];then
+    docker exec -it -w ~/ $container bash
+fi
