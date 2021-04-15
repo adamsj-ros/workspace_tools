@@ -66,5 +66,5 @@ if [ $start_container == 1 ]; then
 fi
 
 if [[ `uname` = "Darwin" || ( $start_container == 0 && `uname` = "Linux" ) ]];then
-    docker exec -it -w ~/ $container bash
+    docker exec -it -w $file_path $container bash
 fi
