@@ -48,10 +48,19 @@ alias rbil='rm -rf build;rm -rf log; rm -rf install*'
 alias rbi='rm -rf build; rm -rf install*'
 alias sros2='source /opt/ros/foxy/setup.zsh'
 alias getrepos='vcs import src <'
+alias getdepends='sudo apt-get update && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
 
 #docker
 alias dps='docker ps -a'
 alias dr='docker run -it --rm'
+docker_volume()
+{
+    host_path=$1
+    containter_path=$2
+    set -- "${@:3}"
+    dr -v $host_path:$containter_path $@
+}
+alias drv='docker_volume'
 alias de='docker exec -it'
 alias di='docker images'
 alias dst='docker stop'

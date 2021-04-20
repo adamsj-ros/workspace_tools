@@ -61,7 +61,7 @@ if [ $start_container == 1 ]; then
         docker run $nethost -d --rm --name $container $dds_volume_map -v $file_path:/opt/workspace $imagetag bash -c "while true; do sleep 5; done"
     elif [ `uname` = "Linux" ];then
         #https://github.com/osrf/rocker#installation
-        rocker --home --name $container --network host --nvidia --ssh --user --x11 $imagetag bash
+        rocker --home --oyr-run-arg " --privileged" --name $container --network host --nvidia --ssh --user --x11 $imagetag bash
     fi
 fi
 
