@@ -13,7 +13,12 @@ if [ `uname` = "Darwin" ];then
     alias cat='bat'
 elif [ `uname` = "Linux" ];then
     alias edit='/usr/share/code/code'
-    alias cat='batcat'
+    which batcat
+    if [ $? -eq 0 ];then
+        alias cat='batcat'
+    else
+        echo "sudo apt update && sudo apt install bat"
+    fi
 fi
 
 TXTRED=$(tput setaf 1) # Red
@@ -21,7 +26,13 @@ TXTGRN=$(tput setaf 2) # Green
 TXTRST=$(tput sgr0) # Text reset.
 
 #reset built-in commands
-alias rm='trash'
+
+which trash
+if [ $? -eq 0 ];then
+    alias rm='trash'
+else
+    echo "sudo apt update && sudo apt install trash-cli"
+fi
 alias mkdir='mkdir -p'
 alias less='less -N'
 alias grep='grep -n --color=always'
@@ -69,6 +80,7 @@ alias drmi='docker rmi'
 alias dpwd="docker inspect -f '{{ .Mounts}}'"
 alias dinu='docker rmi $(docker images -f "dangling=true" -q)'
 alias dcp='docker container prune'
+alias dip='docker image prune'
 
 ignore()
 {
@@ -91,6 +103,8 @@ ignore()
     esac
     done
 
+    echo $file_path
+    return
 
     for x in $(find $file_path -name "CMakeLists.txt"); do
         ignore_path=$(dirname $x)
