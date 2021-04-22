@@ -13,7 +13,7 @@ if [ `uname` = "Darwin" ];then
     alias cat='bat'
 elif [ `uname` = "Linux" ];then
     alias edit='/usr/share/code/code'
-    which batcat
+    which batcat &>/dev/null
     if [ $? -eq 0 ];then
         alias cat='batcat'
     else
@@ -27,7 +27,7 @@ TXTRST=$(tput sgr0) # Text reset.
 
 #reset built-in commands
 
-which trash
+which trash &>/dev/null
 if [ $? -eq 0 ];then
     alias rm='trash'
 else
@@ -128,31 +128,36 @@ findignore()
     find . -name "*IGNORE"
 }
 
-lle()
+list_extensions()
 {
     # set -x
+    command=$1
     # echo "#="$#
     if [ $# -lt 1 ];then
-        echo "usage: lle [dir] first_ext second_ext ..."
-        echo "ex: lle cpp hpp h c"
-        echo "ex: lle . cpp hpp h c"
+        echo "usage: ${command}e [dir] first_ext second_ext ..."
+        echo "ex: ${command}e cpp hpp h c"
+        echo "ex: ${command}e . cpp hpp h c"
         return
     fi
 
     directory="."
-    if [ -d $1 ];then
-        echo $1" is a dir"
-        directory=$1
+    if [ -d $2 ];then
+        echo $2" is a dir"
+        directory=$2
+        set -- "${@:3}"
+    else
         set -- "${@:2}"
     fi
 
     for var in "$@"
     do
         # echo "$var"
-        eval ll $directory"/**/*."$var
+        eval ${command} $directory"/**/*."$var
 
     done
 }
+alias lle='list_extensions ll'
+alias lse='list_extensions ls'
 
 findcpp()
 {
