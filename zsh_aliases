@@ -35,7 +35,8 @@ else
 fi
 alias mkdir='mkdir -p'
 alias less='less -N'
-alias grep='grep -n --color=always'
+alias grep='grep --color=always'
+alias grepn='grep -n'
 alias tail='tail -f'
 
 #file system
@@ -106,7 +107,7 @@ ignore()
     echo $file_path
     return
 
-    for x in $(find $file_path -name "CMakeLists.txt"); do
+    for x in $(find $file_path -name "package.xml"); do
         ignore_path=$(dirname $x)
         $command $ignore_path/COLCON_IGNORE
         $command $ignore_path/AMENT_IGNORE
