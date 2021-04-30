@@ -12,7 +12,17 @@ if [ `uname` = "Darwin" ];then
     alias readelf='objdump'
     alias cat='bat'
 elif [ `uname` = "Linux" ];then
-    alias edit='/usr/share/code/code'
+    which code &>/dev/null
+    if [ $? -eq 0 ];then
+        alias edit='/usr/share/code/code'
+    else
+        which vi &>/dev/null
+        if [ $? -eq 0 ];then
+            alias edit='vi'
+        else
+            echo "sudo apt update && sudo apt install vim"
+        fi
+    fi
     which batcat &>/dev/null
     if [ $? -eq 0 ];then
         alias cat='batcat'
@@ -44,11 +54,12 @@ alias latr='ls -latr'
 alias ltr='ls -ltr'
 
 #shell updates
-alias ec='edit ~/.zshrc'
-alias sc='source ~/.zshrc'
-alias vc='cat ~/.zshrc'
-alias ea='edit ~/.zsh_aliases'
-alias va='cat ~/.zsh_aliases'
+shellname=$(basename $(readlink /proc/$$/exe))
+alias ec='edit ~/.${shellname}rc'
+alias sc='source ~/.${shellname}rc'
+alias vc='cat ~/.${shellname}rc'
+alias ea='edit ~/.${shellname}_aliases'
+alias va='cat ~/.${shellname}_aliases'
 alias es='edit ~/workspace_tools/start_docker.sh'
 alias vs='cat ~/workspace_tools/start_docker.sh'
 #http://zsh.sourceforge.net/FAQ/zshfaq03.html
@@ -58,7 +69,7 @@ alias usplit='unsetopt shwordsplit'
 #ros2
 alias rbil='rm -rf build;rm -rf log; rm -rf install*'
 alias rbi='rm -rf build; rm -rf install*'
-alias sros2='source /opt/ros/foxy/setup.zsh'
+alias sros2='source /opt/ros/foxy/setup.${shellname}'
 alias getrepos='vcs import src <'
 alias getdepends='sudo apt-get update && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
 
