@@ -12,8 +12,7 @@ if [ `uname` = "Darwin" ];then
     alias readelf='objdump'
     alias cat='bat'
 elif [ `uname` = "Linux" ];then
-    which code &>/dev/null
-    if [ $? -eq 0 ];then
+    if [ -x /usr/share/code/code ];then
         alias edit='/usr/share/code/code'
     else
         which vi &>/dev/null
@@ -173,11 +172,24 @@ alias lse='list_extensions ls'
 
 findcpp()
 {
-    if [ -d $1 ];then
-        lle $1 cpp c hpp h|sort
-    else
-        lle cpp c hpp h|sort
-    fi
+    list_extension_option="ls"
+    path_to=""
+    while getopts ":hlp:" opt; do
+    case ${opt} in
+        l )
+            list_extension_option="ll"
+        ;;
+        p )
+            path_to=$OPTARG
+        ;;
+        h )
+            printf "options:\n [l] list form\n [p] path to search\n"
+            return
+        ;;
+    esac
+    done
+
+    list_extensions $list_extension_option $path_to cpp c hpp h|sort
 }
 
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
@@ -195,7 +207,7 @@ all_git_repos()
 {
     gitcommand=""
     pipe=""
-    while getopts ":spbBSH" opt; do
+    while getopts ":hspbBSH" opt; do
     case ${opt} in
         s )
             gitcommand="status -s"
@@ -220,7 +232,7 @@ all_git_repos()
         r )
             gitcommand="log --reverse --oneline"
         ;;
-        ? )
+        h )
             echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-B] (current branch) [-S] (show) [-H] (show hashes) [-r] (log reverse)"
             return
         ;;
