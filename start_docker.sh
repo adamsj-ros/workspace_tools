@@ -40,7 +40,7 @@ case ${opt} in
     ;;
     z )
         shell="zsh"
-        ;;
+    ;;
     h )
         usage
         exit
