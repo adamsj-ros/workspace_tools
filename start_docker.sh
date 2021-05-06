@@ -13,7 +13,7 @@ tag="foxy"
 imagetag=$image":"$tag
 prev_image=$image
 prev_tag=$tag
-network="bridge"
+network="host"
 shell="bash"
 
 while getopts ":hp:c:i:n:t:b:z" opt; do
