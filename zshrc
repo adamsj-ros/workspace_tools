@@ -134,3 +134,5 @@ setopt shwordsplit
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1
+
+export RMW_IMPEMENTATION=rmw_cyclonedds_cpp

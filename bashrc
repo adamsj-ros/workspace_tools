@@ -115,3 +115,5 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export RMW_IMPEMENTATION=rmw_cyclonedds_cpp
