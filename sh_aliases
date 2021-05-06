@@ -51,6 +51,7 @@ alias tail='tail -f'
 #file system
 alias latr='ls -latr'
 alias ltr='ls -ltr'
+alias lt='ls -lt'
 
 #shell updates
 shellname=$(basename $(readlink /proc/$$/exe))
@@ -139,7 +140,7 @@ findignore()
     find . -name "*IGNORE"
 }
 
-list_extensions()
+le()
 {
     # set -x
     command=$1
@@ -167,8 +168,8 @@ list_extensions()
 
     done
 }
-alias lle='list_extensions ll'
-alias lse='list_extensions ls'
+alias lle='le ll'
+alias lse='le ls'
 
 findcpp()
 {
