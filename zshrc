@@ -135,4 +135,4 @@ setopt shwordsplit
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1
 
-export RMW_IMPEMENTATION=rmw_cyclonedds_cpp
+export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
