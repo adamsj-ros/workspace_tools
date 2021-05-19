@@ -72,6 +72,24 @@ alias rbi='rm -rf build; rm -rf install*'
 alias sros2='source /opt/ros/foxy/setup.${shellname}'
 alias getrepos='vcs import src <'
 alias getdepends='sudo apt-get update && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
+alias rbp='ros2 bag play'
+alias rda='ros2 daemon start'
+alias rdo='ros2 daemon stop'
+alias rl='ros2 launch'
+alias rni='ros2 node info'
+alias rnl='ros2 node list'
+alias rpg='ros2 param get'
+alias rpl='ros2 param list'
+alias rr='ros2 run'
+alias rsc='ros2 service call'
+alias rsi='ros2 service info'
+alias rsl='ros2 service list'
+alias rte='ros2 topic echo'
+alias rti='ros2 topic info'
+alias rtl='ros2 topic list'
+alias rtp'ros2 topic pub'
+alias rtt='ros2 topic type'
+
 
 #docker
 alias dps='docker ps -a'
@@ -190,7 +208,7 @@ findcpp()
     esac
     done
 
-    list_extensions $list_extension_option $path_to cpp c hpp h|sort
+    le $list_extension_option $path_to cpp c hpp h|sort
 }
 
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
