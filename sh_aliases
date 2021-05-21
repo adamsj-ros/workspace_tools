@@ -191,28 +191,34 @@ le()
 alias lle='le ll'
 alias lse='le ls'
 
-findcpp()
+find_common_ext()
 {
     list_extension_option="ls"
     path_to=""
-    while getopts ":hlp:" opt; do
+    extenstion_set=""
+    while getopts ":hl:p:e:" opt; do
     case ${opt} in
         l )
-            list_extension_option="ll"
+            list_extension_option=$OPTARG
         ;;
         p )
             path_to=$OPTARG
         ;;
+        e )
+            extenstion_set=$OPTARG
+        ;;
         h )
-            printf "options:\n [l] list form\n [p] path to search\n"
+            printf "options:\n [l] list form\n [p] path to search\n [e] extension set"
             return
         ;;
     esac
     done
 
-    le $list_extension_option $path_to cpp c hpp h|sort
+   le $list_extension_option $path_to $extenstion_set|sort
 }
 
+alias findcpp='find_common_ext -e "cpp c hpp h"'
+alias findpy='find_common_ext -e "py pyc pyo"'
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
 alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"|sort'
