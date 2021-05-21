@@ -47,6 +47,7 @@ alias less='less -N'
 alias grep='grep --color=always'
 alias grepn='grep -n'
 alias tail='tail -f'
+alias aptsearch='apt-cache search'
 
 #file system
 alias latr='ls -latr'
@@ -232,32 +233,31 @@ alias gcleani='git clean -ifdx'
 alias gitaliases='alias|grep git|less'
 all_git_repos()
 {
-    gitcommand=""
+    runcommand=""
     pipe=""
     while getopts ":hspbBSH" opt; do
     case ${opt} in
         s )
-            gitcommand="status -s"
+            runcommand="custom --args status -s"
         ;;
         p )
-            gitcommand="remote -v"
+            runcommand="remotes"
         ;;
         b )
-            gitcommand="branch -a"
+            runcommand="custom --args branch -a"
         ;;
         B )
-            gitcommand="branch -a"
-            pipe="|grep \*"
+            runcommand="branch"
         ;;
         S )
-            gitcommand="show -s"
+            runcommand="custom --args show -s"
         ;;
         H )
-            gitcommand="show -s"
+            runcommand="custom --args show -s"
             pipe="|grep -B 1 commit"
         ;;
         r )
-            gitcommand="log --reverse --oneline"
+            runcommand="custom --args log --reverse --oneline"
         ;;
         h )
             echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-B] (current branch) [-S] (show) [-H] (show hashes) [-r] (log reverse)"
@@ -266,13 +266,8 @@ all_git_repos()
     esac
     done
 
-    for x in $(findgit); do
-        pushd $(dirname $x) &>/dev/null
-        echo -e "${TXTGRN}$(basename $(dirname $x))${TXTRST}"
-        eval git $gitcommand$pipe
-        popd &>/dev/null
-    done
-
+    echo -e "${TXTGRN}$runcommand$pipe${TXTRST}"
+    eval vcs $runcommand$pipe
 }
 
 #https://github.com/sympy/sympy/wiki/Git-hg-rosetta-stone
