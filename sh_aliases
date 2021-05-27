@@ -236,7 +236,7 @@ all_git_repos()
 {
     runcommand=""
     pipe=""
-    while getopts ":hspbBSH" opt; do
+    while getopts ":hspbBSHrc:" opt; do
     case ${opt} in
         s )
             runcommand="custom --args status -s"
@@ -258,16 +258,19 @@ all_git_repos()
             pipe="|grep -B 1 commit"
         ;;
         r )
-            runcommand="custom --args log --reverse --oneline"
+            runcommand="custom --args log -1 --reverse --oneline"
+        ;;
+        c )
+            runcommand="custom --args "$OPTARG
         ;;
         h )
-            echo "options: [-s] (status) [-p] (paths) [-b] (branches) [-B] (current branch) [-S] (show) [-H] (show hashes) [-r] (log reverse)"
+            printf "options:\n [-b] branches\n [-B] current branch\n [-c] run custom vcs command (use double quotes for spaces)\n [-H] show hashes\n [-p] paths\n [-r] log reverse\n [-s] status\n [-S] show\n"
             return
         ;;
     esac
     done
 
-    echo -e "${TXTGRN}$runcommand$pipe${TXTRST}"
+    echo -e "${TXTGRN}vcs $runcommand$pipe${TXTRST}"
     eval vcs $runcommand$pipe
 }
 
