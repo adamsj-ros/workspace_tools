@@ -68,9 +68,25 @@ alias ssplit='setopt shwordsplit'
 alias usplit='unsetopt shwordsplit'
 
 #ros2
-alias rnbil='rm -rf build;rm -rf log; rm -rf install*'
+alias rmbil='rm -rf build;rm -rf log; rm -rf install*'
 alias rmbi='rm -rf build; rm -rf install*'
-alias sros2='source /opt/ros/foxy/setup.${shellname}'
+source_ros2()
+{
+    rosdistro="foxy"
+    while getopts ":d:h" opt; do
+    case ${opt} in
+        d )
+            rosdistro=$OPTARG
+        ;;
+        h ) printf "options:\n [-d] rosdistro (default is foxy)\n"
+        return
+        ;;
+    esac
+    done
+
+    source /opt/ros/$rosdistro/setup.${shellname}
+}
+alias sros2='source_ros2'
 alias sinstall='source install/setup.${shellname}'
 alias getrepos='vcs import src <'
 alias getdepends='sudo apt-get update && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
