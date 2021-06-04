@@ -47,7 +47,12 @@ alias less='less -N'
 alias grep='grep --color=always'
 alias grepn='grep -n'
 alias tail='tail -f'
+
+#apt
 alias aptsearch='apt-cache search'
+alias sau='sudu apt update'
+alias sai='sudo apt install'
+alias dlg='dpkg -l|grep'
 
 #file system
 alias latr='ls -latr'
