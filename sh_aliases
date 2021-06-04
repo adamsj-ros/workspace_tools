@@ -30,9 +30,9 @@ elif [ `uname` = "Linux" ];then
     fi
 fi
 
-TXTRED=$(tput setaf 1) # Red
-TXTGRN=$(tput setaf 2) # Green
-TXTRST=$(tput sgr0) # Text reset.
+export TXTRED=$(tput setaf 1) # Red
+export TXTGRN=$(tput setaf 2) # Green
+export TXTRST=$(tput sgr0) # Text reset.
 
 #reset built-in commands
 

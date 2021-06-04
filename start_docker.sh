@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# set -x
 usage()
 {
     printf "defaults:\n image = %s\n tag = %s\n both = %s\n container = %s\n path = %s\n net host = %s\n shell = %s\n" $image $tag $imagetag $container $file_path $network $shell
@@ -11,8 +12,10 @@ container=`basename $file_path`"-container"
 image="ros"
 tag="foxy"
 imagetag=$image":"$tag
+imagetagstring=$image"_"$tag
 prev_image=$image
 prev_tag=$tag
+prev_imagetag=$imagetag
 network="host"
 shell="bash"
 
@@ -48,17 +51,22 @@ case ${opt} in
 esac
 done
 
+if [ $image != $prev_image ] || [ $tag != $prev_tag ] ;then
+    imagetag=$image":"$tag
+    echo -e "${TXTGRN}changing image:tag to "$imagetag${TXTRST}
+elif [ $imagetag != prev_imagetag ];then
+    echo -e "${TXTGRN}using image:tag = "$imagetag${TXTRST}
+else
+    echo -e "${TXTGRN}using default image:tag = "$imagetag${TXTRST}
+fi
+imagetagstring=`echo $imagetag|sed --expression 's/:/_/g'`
+container=$imagetagstring"_"$container
 
 docker ps -f "name=$container"|grep -v CONTAINER >/dev/null
 start_container=$?
+
 if [ $start_container == 1 ]; then
-    if [ $image != $prev_image ] || [ $tag != $prev_tag ];then
-        imagetag=$image":"$tag
-        echo "changing image:tag to "$imagetag
-    else
-        echo "using default image:tag = "$imagetag
-    fi
-    echo "starting "$container" at "$file_path" from "$imagetag
+    echo -e "${TXTGRN}starting "$container" at "$file_path" from "$imagetag${TXTRST}
     if [ `uname` = "Darwin" ];then
         docker run --net=$network -d --rm --name $container -v $file_path:/opt/workspace $imagetag $shell -c "while true; do sleep 5; done"
     elif [ `uname` = "Linux" ];then
@@ -70,3 +78,5 @@ fi
 if [[ `uname` = "Darwin" || ( $start_container == 0 && `uname` = "Linux" ) ]];then
     docker exec -it -w $file_path $container $shell
 fi
+
+# set +x
