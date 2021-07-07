@@ -252,6 +252,11 @@ alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"|sort'
 alias findpack='find . -name "package.xml"|sort'
 alias findchange='find . -name "CHANGELOG.rst"|sort'
+alias xg='xargs grep'
+alias xgl='xg -l'
+alias xgli='xgl -i'
+alias xglp='|xgl'
+alias xglip='|xgli'
 
 xg()
 {
