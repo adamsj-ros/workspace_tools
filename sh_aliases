@@ -95,30 +95,35 @@ alias rviz2='rviz2 &>/dev/null&'
 alias sros2='source_ros2'
 alias sinstall='source install/setup.${shellname}'
 alias getrepos='vcs import src <'
-alias getdepends='sudo apt-get update && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
+alias getdepends='sau && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
 alias r='ros2'
-alias rbi='ros2 bag info'
-alias rbp='ros2 bag play'
-alias rbr='ros2 bag record'
-alias rda='ros2 daemon start'
-alias rdo='ros2 daemon stop'
-alias rl='ros2 launch'
-alias rni='ros2 node info'
-alias rnl='ros2 node list'
-alias rpg='ros2 param get'
-alias rpl='ros2 param list'
-alias rps='ros2 param set'
-alias rr='ros2 run'
-alias pj='ros2 run plotjuggler plotjuggler'
-alias rsc='ros2 service call'
-alias rsi='ros2 service info'
-alias rsl='ros2 service list'
-alias rte='ros2 topic echo'
-alias rti='ros2 topic info'
+alias rai='r action info'
+alias ral='r action list'
+alias ras='r action send_goal'
+alias rbi='r bag info'
+alias rbp='r bag play'
+alias rbr='r bag record'
+alias rda='r daemon start'
+alias rdo='r daemon stop'
+alias ris='r interface show'
+alias rl='r launch'
+alias rni='r node info'
+alias rnl='r node list'
+alias rpg='r param get'
+alias rpl='r param list'
+alias rps='r param set'
+alias rr='r run'
+alias pj='r run plotjuggler plotjuggler'
+alias rsc='r service call'
+alias rsi='r service info'
+alias rsl='r service list'
+alias rst='r service type'
+alias rte='r topic echo'
+alias rti='r topic info'
 alias rtiv='rti -v'
-alias rtl='ros2 topic list'
-alias rtp='ros2 topic pub'
-alias rtt='ros2 topic type'
+alias rtl='r topic list'
+alias rtp='r topic pub'
+alias rtt='r topic type'
 
 
 #docker
@@ -257,22 +262,6 @@ alias xgl='xg -l'
 alias xgli='xgl -i'
 alias xglp='|xgl'
 alias xglip='|xgli'
-
-xg()
-{
-    ignorecase=""
-    if [ $1 = "-i" ];then
-        ignorecase=$1
-        set -- "${@:2}"
-    fi
-
-    returnstring=""
-    for var in "$@"
-    do
-        returnstring=$returnstring"|xargs grep "$ignorecase" -l "$var
-    done
-    echo $returnstring
-}
 
 #https://stackoverflow.com/questions/48341920/git-branch-command-behaves-like-less
 git config --global pager.branch false
