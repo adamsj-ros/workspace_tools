@@ -277,6 +277,7 @@ git config --global pager.branch false
 git config --global pager.show false
 alias gcleani='git clean -ifdx'
 alias gitaliases='alias|grep git|less'
+alias gshs='gsh -s'
 all_git_repos()
 {
     runcommand=""
