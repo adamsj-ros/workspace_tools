@@ -100,11 +100,13 @@ source_ros2()
 
     source /opt/ros/$rosdistro/setup.${shellname}
 }
-for ros_distro_dir in /opt/ros/*
-do
-        ros_distro=$(basename $ros_distro_dir)
-        alias $ros_distro="source /opt/ros/$ros_distro/setup.zsh"
-done
+if [ -d /opt/ros ];then
+    for ros_distro_dir in /opt/ros/*
+    do
+            ros_distro=$(basename $ros_distro_dir)
+            alias $ros_distro="source /opt/ros/$ros_distro/setup.zsh"
+    done
+fi
 alias rviz2='rviz2 &>/dev/null&'
 alias sros2='source_ros2'
 alias sinstall='source install/setup.${shellname}'
