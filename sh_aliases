@@ -100,6 +100,11 @@ source_ros2()
 
     source /opt/ros/$rosdistro/setup.${shellname}
 }
+for ros_distro_dir in /opt/ros/*
+do
+        ros_distro=$(basename $ros_distro_dir)
+        alias $ros_distro="source /opt/ros/$ros_distro/setup.zsh"
+done
 alias rviz2='rviz2 &>/dev/null&'
 alias sros2='source_ros2'
 alias sinstall='source install/setup.${shellname}'
@@ -261,6 +266,7 @@ find_common_ext()
 
 alias findcpp='find_common_ext -e "cpp c hpp h"'
 alias findpy='find_common_ext -e "py pyc pyo"'
+alias findsrc='(findcpp&&findpy)'
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
 alias findsyml='ls -lR . | grep ^l'
 alias findgit='find . -name ".git"|sort'
@@ -276,7 +282,8 @@ alias xglip='|xgli'
 git config --global pager.branch false
 git config --global pager.show false
 alias gcleani='git clean -ifdx'
-alias gitaliases='alias|grep git|less'
+alias gal='alias|grep git|less'
+alias galg='gal|grep'
 alias gshs='gsh -s'
 all_git_repos()
 {

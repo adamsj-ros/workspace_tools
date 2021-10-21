@@ -137,3 +137,4 @@ export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1
 
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export COLCON_DEFAULTS_FILE=/home/jadams/reference/autoware_ws/src/AutowareAuto/tools/ade_image/colcon-defaults.yaml
+export ECR_URL=440167556817.dkr.ecr.us-east-2.amazonaws.com
