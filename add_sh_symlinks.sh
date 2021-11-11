@@ -13,3 +13,6 @@ fi
 if [ ! -f $HOME/.bashrc ]; then
     ln -sf $script_path/bashrc $HOME/.bashrc
 fi
+if [ ! -f $HOME/.p10k.zsh ]; then
+    ln -sf $script_path/p10k.zsh $HOME/.p10k.zsh
+fi
