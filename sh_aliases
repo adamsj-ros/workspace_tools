@@ -108,7 +108,6 @@ if [ -d /opt/ros ];then
     done
 fi
 alias rviz2='rviz2 &>/dev/null&'
-alias sros2='source_ros2'
 alias sinstall='source install/setup.${shellname}'
 alias getrepos='vcs import src <'
 alias getdepends='sau && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
@@ -184,13 +183,10 @@ ignore()
     esac
     done
 
-    echo $file_path
-    return
-
     for x in $(find $file_path -name "package.xml"); do
         ignore_path=$(dirname $x)
-        $command $ignore_path/COLCON_IGNORE
-        $command $ignore_path/AMENT_IGNORE
+        eval ${command} $ignore_path/COLCON_IGNORE
+        eval ${command} $ignore_path/AMENT_IGNORE
     done
 }
 
