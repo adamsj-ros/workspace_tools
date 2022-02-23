@@ -140,4 +140,12 @@ export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export COLCON_DEFAULTS_FILE=/home/jadams/reference/autoware_ws/src/AutowareAuto/tools/ade_image/colcon-defaults.yaml
 export ECR_URL=440167556817.dkr.ecr.us-east-2.amazonaws.com
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval
+
 ulimit -c unlimited
+
+eval
+BAGMAN_AC_ZSH_SETUP_PATH=/home/jadams/.cache/bagman/autocomplete/zsh_setup && test -f $BAGMAN_AC_ZSH_SETUP_PATH && source $BAGMAN_AC_ZSH_SETUP_PATH; # bagman autocomplete setup
