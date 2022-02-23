@@ -51,6 +51,14 @@ if [ $? -eq 0 ];then
 else
     echo "sudo apt update && sudo apt install trash-cli"
 fi
+#TOD zsh only
+fg() {
+    if [[ $# -eq 1 && $1 = - ]]; then
+        builtin fg %-
+    else
+        builtin fg %"$@"
+    fi
+}
 alias mkdir='mkdir -p'
 alias less='less -N'
 alias grep='grep --color=always'
@@ -105,6 +113,11 @@ if [ -d /opt/ros ];then
     do
             ros_distro=$(basename $ros_distro_dir)
             alias $ros_distro="source /opt/ros/$ros_distro/setup.zsh"
+            if [ "$ros_distro" = "galactic" ];then
+                eval "$(register-python-argcomplete3 ros2)"
+                eval "$(register-python-argcomplete3 r)"
+                eval "$(register-python-argcomplete3 colcon)"
+            fi
     done
 fi
 alias rviz2='rviz2 &>/dev/null&'

@@ -145,6 +145,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 eval
 
+eval "$(register-python-argcomplete3 ros2)"
+eval "$(register-python-argcomplete3 r)"
+eval "$(register-python-argcomplete3 colcon)"
+
 ulimit -c unlimited
 
 eval
