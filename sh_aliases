@@ -256,6 +256,7 @@ find_common_ext()
     list_extension_option="ls"
     path_to=""
     extenstion_set=""
+    sort_option="|sort"
     while getopts ":hl:p:e:" opt; do
     case ${opt} in
         l )
@@ -274,11 +275,12 @@ find_common_ext()
     esac
     done
 
-   le $list_extension_option $path_to $extenstion_set|sort
+   le $list_extension_option $path_to $extenstion_set $sort_option
 }
 
-alias findcpp='find_common_ext -e "cpp c hpp h"'
-alias findpy='find_common_ext -e "py pyc pyo"'
+alias findcpp='find_common_ext -e "cpp c hpp h" -p'
+alias findpy='find_common_ext -e "py pyc pyo" -p'
+alias findurdf='find_common_ext -e "xacro urdf sdf world" -p'
 alias findsrc='(findcpp&&findpy)'
 alias findcmake='find . -type f -name "CMakeLists.txt" -o -name "*.cmake*"|sort'
 alias findsyml='ls -lR . | grep ^l'
@@ -287,11 +289,11 @@ alias findpack='find . -name "package.xml"|sort'
 alias findchange='find . -name "CHANGELOG.rst"|sort'
 alias findfile='find . -type f'
 alias findexec='find . -type f -executable'
+alias findtextfile='find . -type f -exec grep -Iq . {} \; -print'
 alias xg='xargs grep'
+alias xgi='xg -i'
 alias xgl='xg -l'
 alias xgli='xgl -i'
-alias xglp='|xgl'
-alias xglip='|xgli'
 
 #https://stackoverflow.com/questions/48341920/git-branch-command-behaves-like-less
 git config --global pager.branch false

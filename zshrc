@@ -80,7 +80,17 @@ HIST_STAMPS="mm/dd/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
-    docker
+		git-flow # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-flow
+		git-flow-avh #https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-flow-avh
+		docker
+		fzf # https://github.com/junegunn/fzf/blob/master/README.md#usage
+		tmux #https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
+		tmuxinator
+		web-search #alias|grep web
+		command-not-found
+		jira #https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/jira
+		history #h hs (grep) and hsi (grep -i)
+		sudo # esc esc adds sudo to previous command
     )
 
 source $ZSH/oh-my-zsh.sh
@@ -132,8 +142,9 @@ export PATH=/opt/bcc/jre/bin/:$PATH
 
 setopt shwordsplit
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit ~/workspace_tools/p10k.zsh.
+[[ ! -f ~/workspace_tools/p10k.zsh ]] || source ~/workspace_tools/p10k.zsh
+
 export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1
 
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
@@ -153,3 +164,7 @@ ulimit -c unlimited
 
 eval
 BAGMAN_AC_ZSH_SETUP_PATH=/home/jadams/.cache/bagman/autocomplete/zsh_setup && test -f $BAGMAN_AC_ZSH_SETUP_PATH && source $BAGMAN_AC_ZSH_SETUP_PATH; # bagman autocomplete setup
+
+nvm use 16.13.0 &>/dev/null
+export JIRA_URL=https://fireflyequipment.atlassian.net/
+export JIRA_NAME=jeremy.adams@fireflyautomatix.com
