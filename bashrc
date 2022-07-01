@@ -117,3 +117,5 @@ if ! shopt -oq posix; then
 fi
 
 export RMW_IMPEMENTATION=rmw_cyclonedds_cpp
+export ROS_DOMAIN_ID=3
+
