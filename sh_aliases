@@ -64,7 +64,7 @@ alias less='less -N'
 alias grep='grep --color=always -n'
 alias grepn='grep -n'
 alias tail='tail -f'
-alias scp='rsync --partial --append -ravhe ssh'
+alias scp='rsync --partial --append --progress -ravhe ssh'
 
 #apt
 alias aptsearch='apt-cache search'
