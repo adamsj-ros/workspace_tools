@@ -11,6 +11,7 @@ if [ `uname` = "Darwin" ];then
     }
     alias readelf='objdump'
     alias cat='bat'
+    shellname=$(basename $(echo $SHELL))
 elif [ `uname` = "Linux" ];then
     if [ -x /usr/share/code/code ];then
         alias edit='/usr/share/code/code'
@@ -37,6 +38,7 @@ elif [ `uname` = "Linux" ];then
             echo "sudo apt update && sudo apt install bat"
         fi
     fi
+    shellname=$(basename $(readlink /proc/$$/exe))
 fi
 
 export TXTRED=$(tput setaf 1) # Red
@@ -78,7 +80,6 @@ alias ltr='ls -ltr'
 alias lt='ls -lt'
 
 #shell updates
-shellname=$(basename $(readlink /proc/$$/exe))
 alias ec='edit ~/.${shellname}rc'
 alias sc='source ~/.${shellname}rc'
 alias vc='cat ~/.${shellname}rc'
@@ -167,6 +168,11 @@ docker_volume()
     set -- "${@:3}"
     dr -v $host_path:$containter_path $@
 }
+dstrm()
+{
+  docker stop $1
+  docker rm $1
+}
 alias drv='docker_volume'
 alias de='docker exec -it'
 alias di='docker images'
@@ -177,6 +183,9 @@ alias dpwd="docker inspect -f '{{ .Mounts}}'"
 alias dinu='docker rmi $(docker images -f "dangling=true" -q)'
 alias dcp='docker container prune'
 alias dip='docker image prune'
+
+alias dmlcourse='docker run --name mlcourse --restart always -p 8888:8888 -d -v ~/mlcourse:/mlcourse jeremyabllc/mlcourse:latest bash -c "cd /mlcourse; jupyter notebook --allow-root --no-browser"'
+alias dcling='docker run --name cling_notebook --restart always -p 8889:8888 -v ~/cling-notebook:/cling-notebook -d jeremyabllc/cling-notebook:latest jupyter-notebook'
 
 ignore()
 {
