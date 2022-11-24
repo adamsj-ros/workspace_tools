@@ -184,8 +184,38 @@ alias dinu='docker rmi $(docker images -f "dangling=true" -q)'
 alias dcp='docker container prune'
 alias dip='docker image prune'
 
-alias dmlcourse='docker run --name mlcourse --restart always -p 8888:8888 -d -v ~/mlcourse:/mlcourse jeremyabllc/mlcourse:latest bash -c "cd /mlcourse; jupyter notebook --allow-root --no-browser"'
-alias dcling='docker run --name cling_notebook --restart always -p 8889:8888 -v ~/cling-notebook:/cling-notebook -d jeremyabllc/cling-notebook:latest jupyter-notebook'
+dnb()
+{
+  # set -x
+  container="mlcourse"
+  port_map="-p 8888:8888"
+  vol_map="-v $HOME/projects/mlcourse:/mlcourse"
+  working_dir="-w /mlcourse"
+  image="jeremyabllc/mlcourse:latest"
+
+  while getopts ":p:ch" opt; do
+    case ${opt} in
+        p )
+          port_map="-p "$OPTARG
+        ;;
+        c )
+          container="cling_notebook"
+          port_map="-p 8889:8888"
+          vol_map="-v $HOME/projects/cling-notebook:/cling-notebook"
+          working_dir="-w /cling-notebook"
+          image="jeremyabllc/cling-notebook:latest"
+        ;;
+        h ) echo "options: [-p] port map (e.g. 8888:8888) [-c] cling notebook (mlcourse by default)"
+        return
+        ;;
+    esac
+    done
+    docker run --name $container --restart always -d $port_map $vol_map $working_dir $image jupyter-notebook --allow-root --no-browser
+    # set +x
+}
+
+alias dmlcourse='docker run --name mlcourse --restart always -p 8888:8888 -d -v ~/projects/mlcourse:/mlcourse jeremyabllc/mlcourse:latest bash -c "cd /mlcourse; jupyter notebook --allow-root --no-browser"'
+alias dcling='docker run --name cling_notebook --restart always -p 8889:8888 -v ~/projects/cling-notebook:/cling-notebook -d jeremyabllc/cling-notebook:latest jupyter-notebook'
 
 ignore()
 {
