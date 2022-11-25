@@ -147,7 +147,7 @@ setopt shwordsplit
 
 export OPENSSL_ROOT_DIR=/usr/local/opt/openssl@1.1
 
-export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
+#export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export COLCON_DEFAULTS_FILE=/home/jadams/reference/autoware_ws/src/AutowareAuto/tools/ade_image/colcon-defaults.yaml
 export ROS_DOMAIN_ID=3
 export ECR_URL=440167556817.dkr.ecr.us-east-2.amazonaws.com
@@ -169,3 +169,5 @@ BAGMAN_AC_ZSH_SETUP_PATH=/home/jadams/.cache/bagman/autocomplete/zsh_setup && te
 nvm use 16.13.0 &>/dev/null
 export JIRA_URL=https://fireflyequipment.atlassian.net/
 export JIRA_NAME=jeremy.adams@fireflyautomatix.com
+
+export PATH=$PATH:/usr/local/spark/bin

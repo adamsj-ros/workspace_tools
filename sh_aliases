@@ -187,11 +187,24 @@ alias dip='docker image prune'
 dnb()
 {
   # set -x
+  use_gpu=0
+  which nvidia-smi &> /dev/null
+  if [ $? -eq 0 ];then
+    use_gpu=1
+    echo "Nvidia GPU seems to be setup"
+  else
+    use_gpu=0
+    echo "no Nvidia PGU or GPU setup not complete. Use CPU version."
+  fi
+
   container="mlcourse"
   port_map="-p 8888:8888"
   vol_map="-v $HOME/projects/mlcourse:/mlcourse"
   working_dir="-w /mlcourse"
-  image="jeremyabllc/mlcourse:latest"
+  image="jeremyabllc/mlcourse:cpu"
+  if [ $use_gpu -eq 1 ];then
+    image="jeremyabllc/mlcourse:gpu"
+  fi
 
   while getopts ":p:cmh" opt; do
     case ${opt} in
@@ -206,15 +219,14 @@ dnb()
           image="jeremyabllc/cling-notebook:latest"
         ;;
         m )
-          which nvidia-si &> /dev/null
-          if [ $? -eq 0 ];then
+          if [ $use_gpu -eq 1 ];then
             container="mask_rcnn"
             port_map="-p 8890:8888"
             vol_map="-v $HOME/projects/Mask_RCNN:/Mask_RCNN"
             working_dir="-w /Mask_RCNN"
             image="jeremyabllc/mask_rcnn:gpu"
           else
-            echo "no nvidia GPU or GPU setup not complete"
+            echo "no nvidia GPU or GPU setup not complete so not running mask rcnn container"
             return
           fi
         ;;
