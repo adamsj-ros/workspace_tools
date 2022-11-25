@@ -206,10 +206,17 @@ dnb()
           image="jeremyabllc/cling-notebook:latest"
         ;;
         m )
-          container="mask_rcnn"
-          port_map="-p 8890:8888"
-          vol_map="-v $HOME/projects/Mask_RCNN:/Mask_RCNN"
-          working_dir="-w /Mask_RCNN"
+          which nvidia-si &> /dev/null
+          if [ $? -eq 0 ];then
+            container="mask_rcnn"
+            port_map="-p 8890:8888"
+            vol_map="-v $HOME/projects/Mask_RCNN:/Mask_RCNN"
+            working_dir="-w /Mask_RCNN"
+            image="jeremyabllc/mask_rcnn:gpu"
+          else
+            echo "no nvidia GPU or GPU setup not complete"
+            return
+          fi
         ;;
         h ) echo "options: [-p] port map (e.g. 8888:8888) [-c] cling notebook (mlcourse by default) [-m] mask rcnn notebook"
         return
