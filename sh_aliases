@@ -13,8 +13,8 @@ if [ `uname` = "Darwin" ];then
     alias cat='bat'
     shellname=$(basename $(echo $SHELL))
 elif [ `uname` = "Linux" ];then
-    if [ -x /usr/share/code/code ];then
-        alias edit='/usr/share/code/code'
+    if which code &>/dev/null;then
+        alias edit='code'
     else
         which vi &>/dev/null
         if [ $? -eq 0 ];then
@@ -159,8 +159,9 @@ alias rtt='r topic type'
 
 
 #docker
-alias dps='docker ps -a'
-alias dr='docker run -it --rm'
+export DOCKER=docker
+alias dps='${DOCKER} ps -a'
+alias dr='${DOCKER} run -it --rm'
 docker_volume()
 {
     host_path=$1
@@ -170,19 +171,19 @@ docker_volume()
 }
 dstrm()
 {
-  docker stop $1
-  docker rm $1
+  ${DOCKER} stop $1
+  ${DOCKER} rm $1
 }
 alias drv='docker_volume'
-alias de='docker exec -it'
-alias di='docker images'
-alias dst='docker stop'
-alias drm='docker rm'
-alias drmi='docker rmi'
-alias dpwd="docker inspect -f '{{ .Mounts}}'"
-alias dinu='docker rmi $(docker images -f "dangling=true" -q)'
-alias dcp='docker container prune'
-alias dip='docker image prune'
+alias de='${DOCKER} exec -it'
+alias di='${DOCKER} images'
+alias dst='${DOCKER} stop'
+alias drm='${DOCKER} rm'
+alias drmi='${DOCKER} rmi'
+alias dpwd="${DOCKER} inspect -f '{{ .Mounts}}'"
+alias dinu='${DOCKER} rmi $(${DOCKER} images -f "dangling=true" -q)'
+alias dcp='${DOCKER} container prune'
+alias dip='${DOCKER} image prune'
 
 dnb()
 {
@@ -369,6 +370,7 @@ alias gcleani='git clean -ifdx'
 alias gal='alias|grep git|less'
 alias galg='gal|grep'
 alias gshs='gsh -s'
+alias gsup='git submodule sync && git submodule update --init --recursive'
 all_git_repos()
 {
     runcommand=""
