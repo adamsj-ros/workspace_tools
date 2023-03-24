@@ -184,6 +184,7 @@ alias dpwd="${DOCKER} inspect -f '{{ .Mounts}}'"
 alias dinu='${DOCKER} rmi $(${DOCKER} images -f "dangling=true" -q)'
 alias dcp='${DOCKER} container prune'
 alias dip='${DOCKER} image prune'
+alias drminone='${DOCKER} images -f 'dangling=true' -q|xargs -n 1 ${DOCKER} rmi'
 
 dnb()
 {
@@ -371,6 +372,7 @@ alias gal='alias|grep git|less'
 alias galg='gal|grep'
 alias gshs='gsh -s'
 alias gsup='git submodule sync && git submodule update --init --recursive'
+alias gsti='git status --ignored'
 all_git_repos()
 {
     runcommand=""
