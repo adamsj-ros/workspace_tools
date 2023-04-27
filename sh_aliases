@@ -359,7 +359,8 @@ alias findfile='find . -type f'
 alias findexec='find . -type f -executable'
 alias findtextfile='find . -type f -exec grep -Iq . {} \; -print'
 # why to use "-n" https://terminator-gtk3.readthedocs.io/en/latest/plugins.html
-alias xg='xargs grep -n'
+alias xgold='xargs grep -n'
+alias xg="xargs -d '\n' grep -n"
 alias xgi='xg -i'
 alias xgl='xg -l'
 alias xgli='xgl -i'
@@ -373,6 +374,9 @@ alias galg='gal|grep'
 alias gshs='gsh -s'
 alias gsup='git submodule sync && git submodule update --init --recursive'
 alias gsti='git status --ignored'
+alias gai='git add -i'
+alias gla="find . -mindepth 1 -maxdepth 1 -type d -print -exec git -C {} pull \;"
+alias gs=""
 all_git_repos()
 {
     runcommand=""
