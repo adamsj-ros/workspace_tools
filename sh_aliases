@@ -125,7 +125,7 @@ fi
 alias rviz2='rviz2 &>/dev/null&'
 alias sinstall='source install/setup.${shellname}'
 alias getrepos='vcs import src <'
-alias getdepends='sau && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro foxy'
+alias getdepends='sau && rosdep update && rosdep install -y -r --from-paths . --ignore-src --rosdistro humble'
 alias r='ros2'
 alias rai='r action info'
 alias ral='r action list'
@@ -157,11 +157,31 @@ alias rtl='r topic list'
 alias rtp='r topic pub'
 alias rtt='r topic type'
 
+rename_hidden_mcaps()
+{
+path_to_mcaps=${1:-$(pwd)}
+
+hidden_list=$(find $path_to_mcaps -type f -name ".rosbag*.mcap")
+echo $hidden_list
+
+for path_to_mcap in $hidden_list
+do
+  pathname=$(dirname $path_to_mcap)
+  bagname=$(basename $path_to_mcap)
+  unhiddenfile="${bagname#.}"
+  # echo $pathname
+  # echo $bagname
+  # echo $unhiddenfile
+  pushd $pathname
+  mv $bagname $unhiddenfile
+  popd
+done
+}
+
 
 #docker
-export DOCKER=docker
-alias dps='${DOCKER} ps -a'
-alias dr='${DOCKER} run -it --rm'
+alias dps='docker ps -a'
+alias dr='docker run -i -t --rm'
 docker_volume()
 {
     host_path=$1
@@ -171,20 +191,20 @@ docker_volume()
 }
 dstrm()
 {
-  ${DOCKER} stop $1
-  ${DOCKER} rm $1
+  docker stop $1
+  docker rm $1
 }
 alias drv='docker_volume'
-alias de='${DOCKER} exec -it'
-alias di='${DOCKER} images'
-alias dst='${DOCKER} stop'
-alias drm='${DOCKER} rm'
-alias drmi='${DOCKER} rmi'
-alias dpwd="${DOCKER} inspect -f '{{ .Mounts}}'"
-alias dinu='${DOCKER} rmi $(${DOCKER} images -f "dangling=true" -q)'
-alias dcp='${DOCKER} container prune'
-alias dip='${DOCKER} image prune'
-alias drminone='${DOCKER} images -f 'dangling=true' -q|xargs -n 1 ${DOCKER} rmi'
+alias de='docker exec -i -t'
+alias di='docker images'
+alias dst='docker stop'
+alias drm='docker rm'
+alias drmi='docker rmi'
+alias dpwd="docker inspect -f '{{ .Mounts}}'"
+alias dinu='docker rmi $(docker images -f "dangling=true" -q)'
+alias dcp='docker container prune'
+alias dip='docker image prune'
+alias drminone='docker images -f 'dangling=true' -q|xargs -n 1 docker rmi'
 
 dnb()
 {
@@ -364,6 +384,8 @@ alias xg="xargs -d '\n' grep -n"
 alias xgi='xg -i'
 alias xgl='xg -l'
 alias xgli='xgl -i'
+
+export hl='--help|less'
 
 #https://stackoverflow.com/questions/48341920/git-branch-command-behaves-like-less
 git config --global pager.branch false
